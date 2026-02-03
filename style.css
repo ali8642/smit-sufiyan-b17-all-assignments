@@ -1,0 +1,450 @@
+/* ─────────────────────────────────────────────
+   RESET & BASE
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────────
+   CSS VARIABLES
+   ───────────────────────────────────────────── */
+:root {
+    --bg-deep: #060810;
+    --accent-cyan: #22d3ee;
+    --accent-rose: #fb7185;
+    --accent-violet: #a78bfa;
+    --text-primary: #f0f2f5;
+    --text-muted: #7a8494;
+    --border-glass: rgba(255, 255, 255, 0.07);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─────────────────────────────────────────────
+   BODY
+   ───────────────────────────────────────────── */
+body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', 'Helvetica Neue', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ─────────────────────────────────────────────
+   AMBIENT BACKGROUND ORBS
+   ───────────────────────────────────────────── */
+.bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 18s ease-in-out infinite alternate;
+}
+
+.bg-orb-1 {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, #1e3a5f 0%, transparent 70%);
+    top: -120px;
+    left: -140px;
+}
+
+.bg-orb-2 {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, #2a1b4e 0%, transparent 70%);
+    bottom: -80px;
+    right: -100px;
+    animation-delay: -6s;
+    animation-duration: 22s;
+}
+
+.bg-orb-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #0f3338 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -12s;
+    animation-duration: 26s;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 30px) scale(1.08);
+    }
+}
+
+/* grain texture */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+}
+
+/* ─────────────────────────────────────────────
+   HEADER / .desc
+   ───────────────────────────────────────────── */
+.desc {
+    position: relative;
+    z-index: 2;
+    padding: 52px 32px 38px;
+    border-bottom: none;
+    animation: fadeDown 0.8s var(--ease-out) both;
+}
+
+h3 {
+    text-align: right;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    animation: fadeDown 0.7s 0.1s var(--ease-out) both;
+}
+
+h1 {
+    text-align: center;
+    font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, var(--text-primary) 25%, var(--accent-cyan) 55%, var(--accent-violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeDown 0.7s 0.2s var(--ease-out) both;
+}
+
+/* animated accent line */
+.desc-line {
+    width: 68px;
+    height: 3px;
+    margin: 22px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+    transform: scaleX(0);
+    animation: expandLine 0.9s 0.42s var(--ease-out) forwards;
+}
+
+@keyframes expandLine {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ─────────────────────────────────────────────
+   PROJECT GRID  (#projectDiv)
+   ───────────────────────────────────────────── */
+#projectDiv {
+    position: relative;
+    z-index: 2;
+    padding: 38px 28px 64px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 26px;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────
+   CARD  (.card)
+   ───────────────────────────────────────────── */
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    justify-self: center;
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 1px solid var(--border-glass);
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    cursor: pointer;
+
+    /* entrance animation – staggered via nth-child below */
+    opacity: 0;
+    transform: translateY(30px) scale(0.94);
+    animation: cardReveal 0.55s var(--ease-out) both;
+
+    transition:
+        transform 0.42s var(--ease-spring),
+        box-shadow 0.42s var(--ease-out),
+        border-color 0.35s ease;
+}
+
+/* stagger delays */
+.card:nth-child(1) {
+    animation-delay: 0.12s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.22s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.42s;
+}
+
+.card:nth-child(5) {
+    animation-delay: 0.52s;
+}
+
+.card:nth-child(6) {
+    animation-delay: 0.62s;
+}
+
+.card:nth-child(7) {
+    animation-delay: 0.72s;
+}
+
+.card:nth-child(8) {
+    animation-delay: 0.82s;
+}
+
+.card:nth-child(9) {
+    animation-delay: 0.92s;
+}
+
+.card:nth-child(10) {
+    animation-delay: 1.02s;
+}
+
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── card hover ── */
+.card:hover {
+    transform: translateY(-7px) scale(1.04);
+    border-color: var(--accent-cyan);
+    box-shadow:
+        0 8px 44px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(34, 211, 238, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ── gradient wash over the image (darkens bottom) ── */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(6, 8, 16, 0.06) 0%,
+            rgba(6, 8, 16, 0.22) 50%,
+            rgba(6, 8, 16, 0.75) 100%);
+    border-radius: inherit;
+    z-index: 1;
+    transition: background 0.4s ease;
+}
+
+.card:hover::before {
+    background: linear-gradient(to bottom,
+            rgba(6, 8, 16, 0.12) 0%,
+            rgba(6, 8, 16, 0.40) 48%,
+            rgba(6, 8, 16, 0.86) 100%);
+}
+
+/* ── card name text (first direct child div) ── */
+.card>div:first-of-type {
+    position: absolute;
+    bottom: 44px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+    opacity: 0.9;
+    transform: translateY(4px);
+    transition: transform 0.4s var(--ease-out), opacity 0.35s ease;
+}
+
+.card:hover>div:first-of-type {
+    transform: translateY(-3px);
+    opacity: 1;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTON ROW  (.btn)
+   ───────────────────────────────────────────── */
+.btn {
+    position: absolute;
+    bottom: 13px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.32s ease,
+        transform 0.4s var(--ease-out);
+}
+
+.card:hover .btn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTONS
+   ───────────────────────────────────────────── */
+button {
+    position: relative;
+    width: 108px;
+    padding: 7px 0;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    transition:
+        transform 0.24s var(--ease-spring),
+        box-shadow 0.24s ease,
+        border-color 0.24s ease;
+}
+
+button:hover {
+    transform: scale(1.09);
+}
+
+/* shimmer sweep on hover */
+button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+            transparent 25%,
+            rgba(255, 255, 255, 0.25) 50%,
+            transparent 75%);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+button:hover::after {
+    transform: translateX(100%);
+}
+
+/* ── .live ── */
+.live {
+    background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+    color: #111;
+}
+
+.live:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 4px 22px rgba(34, 211, 238, 0.32);
+}
+
+.live a {
+    text-decoration: none;
+    color: #111827;
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ── .github ── */
+.github {
+    background: linear-gradient(135deg, #1c1f2e, #2d3148);
+    color: #e2e8f0;
+}
+
+.github:hover {
+    border-color: var(--accent-violet);
+    box-shadow: 0 4px 22px rgba(167, 139, 250, 0.32);
+}
+
+.github a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .desc {
+        padding: 36px 18px 26px;
+    }
+
+    #projectDiv {
+        padding: 24px 14px 48px;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 18px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .btn {
+        gap: 8px;
+    }
+
+    button {
+        width: 94px;
+        font-size: 0.82rem;
+    }
+}
