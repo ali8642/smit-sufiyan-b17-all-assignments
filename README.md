@@ -2,7 +2,7 @@
   <h1>🚀 JavaScript Logic Showcase</h1>
   <p>
     <b>A centralized hub of 10+ interactive web modules</b><br>
-    <i>DOM Manipulation • Algorithms • Game Logic</i>
+    <i>DOM Manipulation • Algorithms • Game Logic • Advance JavaScript • Backend Practices</i>
   </p>
   
   <p>
