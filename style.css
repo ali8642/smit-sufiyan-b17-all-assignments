@@ -1,6 +1,4 @@
-/* ─────────────────────────────────────────────
-   RESET & BASE
-   ───────────────────────────────────────────── */
+
 *,
 *::before,
 *::after {
@@ -9,9 +7,6 @@
     box-sizing: border-box;
 }
 
-/* ─────────────────────────────────────────────
-   CSS VARIABLES
-   ───────────────────────────────────────────── */
 :root {
     --bg-deep: #060810;
     --accent-cyan: #22d3ee;
@@ -24,9 +19,6 @@
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ─────────────────────────────────────────────
-   BODY
-   ───────────────────────────────────────────── */
 body {
     background: var(--bg-deep);
     color: var(--text-primary);
@@ -36,9 +28,6 @@ body {
     position: relative;
 }
 
-/* ─────────────────────────────────────────────
-   AMBIENT BACKGROUND ORBS
-   ───────────────────────────────────────────── */
 .bg-orb {
     position: fixed;
     border-radius: 50%;
@@ -99,9 +88,7 @@ body {
     background-size: 200px 200px;
 }
 
-/* ─────────────────────────────────────────────
-   HEADER / .desc
-   ───────────────────────────────────────────── */
+
 .desc {
     position: relative;
     z-index: 2;
@@ -133,7 +120,6 @@ h1 {
     animation: fadeDown 0.7s 0.2s var(--ease-out) both;
 }
 
-/* animated accent line */
 .desc-line {
     width: 68px;
     height: 3px;
@@ -162,9 +148,6 @@ h1 {
     }
 }
 
-/* ─────────────────────────────────────────────
-   PROJECT GRID  (#projectDiv)
-   ───────────────────────────────────────────── */
 #projectDiv {
     position: relative;
     z-index: 2;
@@ -176,9 +159,7 @@ h1 {
     margin: 0 auto;
 }
 
-/* ─────────────────────────────────────────────
-   CARD  (.card)
-   ───────────────────────────────────────────── */
+
 .card {
     position: relative;
     width: 100%;
@@ -208,7 +189,7 @@ h1 {
         border-color 0.35s ease;
 }
 
-/* stagger delays */
+
 .card:nth-child(1) {
     animation-delay: 0.12s;
 }
@@ -287,7 +268,7 @@ h1 {
             rgba(6, 8, 16, 0.86) 100%);
 }
 
-/* ── card name text (first direct child div) ── */
+
 .card>div:first-of-type {
     position: absolute;
     bottom: 44px;
@@ -310,9 +291,7 @@ h1 {
     opacity: 1;
 }
 
-/* ─────────────────────────────────────────────
-   BUTTON ROW  (.btn)
-   ───────────────────────────────────────────── */
+
 .btn {
     position: absolute;
     bottom: 13px;
@@ -335,9 +314,7 @@ h1 {
     pointer-events: auto;
 }
 
-/* ─────────────────────────────────────────────
-   BUTTONS
-   ───────────────────────────────────────────── */
+
 button {
     position: relative;
     width: 108px;
@@ -421,9 +398,7 @@ button:hover::after {
     text-align: center;
 }
 
-/* ─────────────────────────────────────────────
-   RESPONSIVE
-   ───────────────────────────────────────────── */
+
 @media (max-width: 600px) {
     .desc {
         padding: 36px 18px 26px;
